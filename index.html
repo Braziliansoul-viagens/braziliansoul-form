@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Formulário – Curadoria de Viagem | Brazilian Soul</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --primary: #0b3b5c;
+      --accent: #00a8b8;
+      --bg: #f5f7fa;
+      --text: #1f2933;
+      --border: #d0d7e2;
+      --radius: 10px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      padding: 20px;
+      color: var(--text);
+    }
+
+    .form-wrapper {
+      max-width: 900px;
+      margin: 0 auto 40px;
+      background: #ffffff;
+      border-radius: 18px;
+      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.15);
+      padding: 30px 24px 32px;
+    }
+
+    @media (min-width: 768px) {
+      .form-wrapper {
+        padding: 40px 40px 44px;
+      }
+    }
+
+    .form-header {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .form-header img.logo {
+      max-width: 190px;
+      height: auto;
+      margin-bottom: 12px;
+    }
+
+    .form-header h1 {
+      font-size: 1.6rem;
+      margin: 0 0 4px;
+      color: var(--primary);
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    .form-header p {
+      margin: 0;
+      font-size: 0.95rem;
+      color: #4b5563;
+    }
+
+    form {
+      display: grid;
+      gap: 22px;
+    }
+
+    fieldset {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 16px 18px;
+    }
+
+    @media (min-width: 768px) {
+      fieldset {
+        padding: 18px 20px 20px;
+      }
+    }
+
+    legend {
+      padding: 0 8px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--primary);
+    }
+
+    .field-group {
+      display: grid;
+      gap: 14px;
+      margin-top: 10px;
+    }
+
+    .field-row {
+      display: grid;
+      gap: 12px;
+    }
+
+    @media (min-width: 640px) {
+      .field-row.two-cols {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .field-row.three-cols {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    label {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-bottom: 4px;
+      color: #374151;
+    }
+
+    .required::after {
+      content: " *";
+      color: #e11d48;
+      font-weight: 600;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="number"],
+    input[type="date"],
+    textarea,
+    select {
+      width: 100%;
+      padding: 9px 10px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
+      background-color: #f9fafb;
+    }
+
+    textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px rgba(0, 168, 184, 0.2);
+      background-color: #ffffff;
+    }
+
+    .help-text {
+      font-size: 0.8rem;
+      color: #6b7280;
+      margin-top: 2px;
+    }
+
+    .options-row {
+      display: grid;
+      gap: 6px;
+      font-size: 0.9rem;
+    }
+
+    @media (min-width: 640px) {
+      .options-row.inline {
+        grid-auto-flow: column;
+        grid-auto-columns: minmax(0, 1fr);
+      }
+    }
+
+    .options-row label {
+      font-weight: 400;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+    }
+
+    input[type="checkbox"],
+    input[type="radio"] {
+      width: 16px;
+      height: 16px;
+      accent-color: var(--accent);
+    }
+
+    .form-footer {
+      margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      align-items: flex-start;
+    }
+
+    button[type="submit"] {
+      border: none;
+      border-radius: 999px;
+      padding: 11px 26px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      background: linear-gradient(135deg, var(--primary), #051827);
+      color: #ffffff;
+      cursor: pointer;
+      box-shadow: 0 14px 30px rgba(15, 23, 42, 0.25);
+      transition: transform 0.1s ease, box-shadow 0.1s ease, filter 0.1s ease;
+    }
+
+    button[type="submit"]:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 18px 36px rgba(15, 23, 42, 0.28);
+      filter: brightness(1.05);
+    }
+
+    button[type="submit"]:active {
+      transform: translateY(0);
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.2);
+      filter: brightness(0.98);
+    }
+
+    .tiny-note {
+      font-size: 0.77rem;
+      color: #6b7280;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-wrapper">
+    <div class="form-header">
+      <!-- Troque o src abaixo pelo caminho real da sua logo -->
+      <img src="logo-brazilian-soul.png" alt="Brazilian Soul" class="logo" />
+      <h1>Curadoria de Viagem – Brazilian Soul</h1>
+      <p>Preencha as informações abaixo para criarmos um roteiro personalizado para o seu perfil Premium, Luxo ou Ultra-Luxo.</p>
+    </div>
+
+    <form id="brazilian-soul-form" action="https://formsubmit.co/contact@braziliansoultours.com" method="POST">
+      <!-- 1) Informações do viajante -->
+      <fieldset>
+        <legend>1. Informações do Viajante</legend>
+        <div class="field-group">
+          <div class="field-row two-cols">
+            <div>
+              <label for="nome" class="required">Nome completo</label>
+              <input type="text" id="nome" name="nome" required />
+            </div>
+            <div>
+              <label for="email" class="required">E-mail</label>
+              <input type="email" id="email" name="email" required />
+            </div>
+          </div>
+
+          <div class="field-row two-cols">
+            <div>
+              <label for="whatsapp" class="required">WhatsApp (com DDI e DDD)</label>
+              <input type="tel" id="whatsapp" name="whatsapp" placeholder="+55 11 99999-9999" required />
+            </div>
+            <div>
+              <label for="cidade-origem" class="required">Cidade e país de origem</label>
+              <input type="text" id="cidade-origem" name="cidade_origem" required />
+            </div>
+          </div>
+
+          <div class="field-row two-cols">
+            <div>
+              <label for="quantidade-viajantes" class="required">Número total de viajantes</label>
+              <input type="number" min="1" id="quantidade-viajantes" name="quantidade_viajantes" required />
+            </div>
+            <div>
+              <label class="required">Quem vai viajar?</label>
+              <div class="options-row inline">
+                <label><input type="radio" name="quem_vai_viajar" value="Casal" required /> Casal</label>
+                <label><input type="radio" name="quem_vai_viajar" value="Familia" /> Família</label>
+                <label><input type="radio" name="quem_vai_viajar" value="Amigos" /> Amigos</label>
+                <label><input type="radio" name="quem_vai_viajar" value="Solo" /> Viagem solo</label>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <label for="idades">Idades aproximadas dos viajantes</label>
+            <textarea id="idades" name="idades" placeholder="Ex.: 2 adultos (38 e 40 anos) e 2 crianças (7 e 10 anos)"></textarea>
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- 2) Datas e duração -->
+      <fieldset>
+        <legend>2. Datas e Duração</legend>
+        <div class="field-group">
+          <div class="field-row two-cols">
+            <div>
+              <label for="data-inicio">Data aproximada de início</label>
+              <input type="date" id="data-inicio" name="data_inicio" />
+            </div>
+            <div>
+              <label for="data-fim">Data aproximada de retorno</label>
+              <input type="date" id="data-fim" name="data_fim" />
+            </div>
+          </div>
+
+          <div class="field-row two-cols">
+            <div>
+              <label class="required">Você tem flexibilidade de datas?</label>
+              <div class="options-row inline">
+                <label><input type="radio" name="flexibilidade_datas" value="Sim" required /> Sim</label>
+                <label><input type="radio" name="flexibilidade_datas" value="Nao" /> Não</label>
+              </div>
+            </div>
+            <div>
+              <label for="descricao-flexibilidade">Se sim, conte como é essa flexibilidade</label>
+              <textarea id="descricao-flexibilidade" name="descricao_flexibilidade" placeholder="Ex.: qualquer semana de setembro, apenas férias escolares etc."></textarea>
+            </div>
+          </div>
+
+          <div>
+            <label for="noites">Quantidade ideal de noites</label>
+            <input type="number" min="1" id="noites" name="noites" />
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- 3) Destinos -->
+      <fieldset>
+        <legend>3. Destinos</legend>
+        <div class="field-group">
+          <div>
+            <label for="destinos" class="required">Destino(s) que deseja visitar</label>
+            <textarea id="destinos" name="destinos" required placeholder="Ex.: Itália – Roma, Costa Amalfitana e Puglia; Japão – Tóquio, Kyoto e região de montanhas etc."></textarea>
+          </div>
+
+          <div>
+            <label class="required">Você já tem uma rota em mente?</label>
+            <div class="options-row">
+              <label><input type="radio" name="rota_pronta" value="Tenho roteiro definido" required /> Sim, já tenho uma rota mais ou menos definida</label>
+              <label><input type="radio" name="rota_pronta" value="Tenho ideias" /> Tenho algumas ideias, mas quero ajuda para organizar</label>
+              <label><input type="radio" name="rota_pronta" value="Quero sugestoes" /> Não tenho roteiro, quero que vocês sugiram tudo</label>
+            </div>
+          </div>
+
+          <div class="field-row two-cols">
+            <div>
+              <label for="destinos-obrigatorios">Destinos obrigatórios</label>
+              <textarea id="destinos-obrigatorios" name="destinos_obrigatorios" placeholder="Cidades ou regiões que precisam estar no roteiro."></textarea>
+            </div>
+            <div>
+              <label for="destinos-evitar">Destinos que NÃO deseja incluir</label>
+              <textarea id="destinos-evitar" name="destinos_evitar" placeholder="Algum destino que você não quer colocar de jeito nenhum?"></textarea>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- 4) Estilo de viagem -->
+      <fieldset>
+        <legend>4. Estilo de Viagem</legend>
+        <div class="field-group">
+          <div>
+            <label class="required">Como você imagina o estilo dessa viagem?</label>
+            <div class="options-row">
+              <label><input type="checkbox" name="estilo_viagem[]" value="Premium" /> Premium (bom custo-benefício com conforto)</label>
+              <label><input type="checkbox" name="estilo_viagem[]" value="Luxo" /> Luxo (hotéis 5★ e experiências diferenciadas)</label>
+              <label><input type="checkbox" name="estilo_viagem[]" value="Ultra-Luxo" /> Ultra-Luxo (experiências e hotéis icônicos)</label>
+              <label><input type="checkbox" name="estilo_viagem[]" value="Romantica" /> Viagem romântica / lua de mel</label>
+              <label><input type="checkbox" name="estilo_viagem[]" value="Cultural" /> Cultural e histórica</label>
+              <label><input type="checkbox" name="estilo_viagem[]" value="Praia" /> Praia e relaxamento</label>
+              <label><input type="checkbox" name="estilo_viagem[]" value="Natureza" /> Natureza e paisagens</label>
+              <label><input type="checkbox" name="estilo_viagem[]" value="Gastronomia" /> Gastronomia e vinhos</label>
+              <label><input type="checkbox" name="estilo_viagem[]" value="Compras" /> Compras</label>
+              <label><input type="checkbox" name="estilo_viagem[]" value="Wellness" /> Wellness / Spa</label>
+              <label><input type="checkbox" name="estilo_viagem[]" value="Vida Noturna" /> Vida noturna</label>
+            </div>
+          </div>
+
+          <div class="field-row two-cols">
+            <div>
+              <label class="required">Ritmo da viagem</label>
+              <div class="options-row">
+                <label><input type="radio" name="ritmo" value="Tranquilo" required /> Mais tranquilo (mais tempo livre)</label>
+                <label><input type="radio" name="ritmo" value="Equilibrado" /> Equilibrado (passeios + tempo livre)</label>
+                <label><input type="radio" name="ritmo" value="Intenso" /> Mais intenso (muitas experiências por dia)</label>
+              </div>
+            </div>
+            <div>
+              <label class="required">Como você se sente em relação a trocar de hotel?</label>
+              <div class="options-row">
+                <label><input type="radio" name="troca_hoteis" value="Pouco" required /> Prefiro trocar pouco de hotel</label>
+                <label><input type="radio" name="troca_hoteis" value="Ok" /> Não me incomodo se fizer sentido para o roteiro</label>
+                <label><input type="radio" name="troca_hoteis" value="Tanto faz" /> Tanto faz</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- 5) Hospedagem -->
+      <fieldset>
+        <legend>5. Hospedagem</legend>
+        <div class="field-group">
+          <div class="field-row two-cols">
+            <div>
+              <label class="required">Categoria de hotel desejada</label>
+              <div class="options-row">
+                <label><input type="radio" name="categoria_hotel" value="Premium" required /> Premium (4★ superior / boutique)</label>
+                <label><input type="radio" name="categoria_hotel" value="Luxo" /> Luxo (5★)</label>
+                <label><input type="radio" name="categoria_hotel" value="Ultra-Luxo" /> Ultra-Luxo (Aman, Four Seasons, etc.)</label>
+              </div>
+            </div>
+            <div>
+              <label>Estilo de hotel preferido</label>
+              <div class="options-row">
+                <label><input type="checkbox" name="estilo_hotel[]" value="Resort" /> Resort</label>
+                <label><input type="checkbox" name="estilo_hotel[]" value="Boutique" /> Hotel boutique</label>
+                <label><input type="checkbox" name="estilo_hotel[]" value="Iconico" /> Hotel icônico na cidade</label>
+                <label><input type="checkbox" name="estilo_hotel[]" value="Natureza" /> Hotel em meio à natureza</label>
+                <label><input type="checkbox" name="estilo_hotel[]" value="Pe na areia" /> Pé na areia</label>
+                <label><input type="checkbox" name="estilo_hotel[]" value="Urbano" /> Hotel urbano sofisticado</label>
+                <label><input type="checkbox" name="estilo_hotel[]" value="Sem preferencia" /> Não tenho preferência definida</label>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <label>O que é mais importante na hospedagem para você?</label>
+            <div class="options-row">
+              <label><input type="checkbox" name="prioridades_hotel[]" value="Vista" /> Quarto com vista diferenciada</label>
+              <label><input type="checkbox" name="prioridades_hotel[]" value="Cafe" /> Café da manhã incluso</label>
+              <label><input type="checkbox" name="prioridades_hotel[]" value="Piscina" /> Piscina</label>
+              <label><input type="checkbox" name="prioridades_hotel[]" value="Spa" /> Spa</label>
+              <label><input type="checkbox" name="prioridades_hotel[]" value="Academia" /> Academia</label>
+              <label><input type="checkbox" name="prioridades_hotel[]" value="Praia" /> Acesso direto à praia</label>
+              <label><input type="checkbox" name="prioridades_hotel[]" value="Quartos conectados" /> Quartos conectados</label>
+              <label><input type="checkbox" name="prioridades_hotel[]" value="Privacidade" /> Privacidade/isolamento</label>
+              <label><input type="checkbox" name="prioridades_hotel[]" value="Localizacao central" /> Localização central</label>
+            </div>
+          </div>
+
+          <div>
+            <label for="hotel-sonho">Algum hotel dos sonhos que gostaria de incluir?</label>
+            <textarea id="hotel-sonho" name="hotel_sonho" placeholder="Ex.: Aman Tokyo, Four Seasons Taormina, Mandarin Oriental Lago di Como..."></textarea>
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- 6) Voos -->
+      <fieldset>
+        <legend>6. Voos</legend>
+        <div class="field-group">
+          <div class="field-row two-cols">
+            <div>
+              <label for="aeroporto-saida">Cidade / aeroporto de saída</label>
+              <input type="text" id="aeroporto-saida" name="aeroporto_saida" />
+            </div>
+            <div>
+              <label class="required">Classe de voo desejada</label>
+              <div class="options-row">
+                <label><input type="radio" name="classe_voo" value="Economica Premium" required /> Econômica Premium</label>
+                <label><input type="radio" name="classe_voo" value="Executiva" /> Executiva</label>
+                <label><input type="radio" name="classe_voo" value="Primeira Classe" /> Primeira Classe</label>
+                <label><input type="radio" name="classe_voo" value="Comparar" /> Depende do valor final</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="field-row two-cols">
+            <div>
+              <label for="companhias-preferidas">Companhias aéreas preferidas ou para evitar</label>
+              <textarea id="companhias-preferidas" name="companhias_preferidas"></textarea>
+            </div>
+            <div>
+              <label>Como você se sente em relação a conexões?</label>
+              <div class="options-row">
+                <label><input type="radio" name="conexoes" value="Diretos" /> Prefiro voos diretos</label>
+                <label><input type="radio" name="conexoes" value="Planejadas" /> Aceito conexões bem planejadas</label>
+                <label><input type="radio" name="conexoes" value="Tanto faz" /> Tanto faz</label>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <label for="milhas">Pretende usar milhas? De qual programa?</label>
+            <textarea id="milhas" name="milhas"></textarea>
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- 7) Gastronomia e experiências -->
+      <fieldset>
+        <legend>7. Gastronomia & Experiências</legend>
+        <div class="field-group">
+          <div>
+            <label>Que tipo de experiências gastronômicas você prefere?</label>
+            <div class="options-row">
+              <label><input type="checkbox" name="gastronomia[]" value="Sofisticados" /> Restaurantes sofisticados</label>
+              <label><input type="checkbox" name="gastronomia[]" value="Locais" /> Restaurantes locais autênticos</label>
+              <label><input type="checkbox" name="gastronomia[]" value="Alta gastronomia" /> Alta gastronomia / Michelin</label>
+              <label><input type="checkbox" name="gastronomia[]" value="Bares" /> Bares e rooftops</label>
+              <label><input type="checkbox" name="gastronomia[]" value="Wine bar" /> Wine bars / enotecas</label>
+              <label><input type="checkbox" name="gastronomia[]" value="Praticidade" /> Foco em praticidade</label>
+            </div>
+          </div>
+
+          <div>
+            <label for="restricoes-alimentares">Restrições ou preferências alimentares</label>
+            <textarea id="restricoes-alimentares" name="restricoes_alimentares"></textarea>
+          </div>
+
+          <div>
+            <label>Quais experiências você tem vontade de viver nessa viagem?</label>
+            <div class="options-row">
+              <label><input type="checkbox" name="experiencias[]" value="Tours privados" /> Tours privados com guia</label>
+              <label><input type="checkbox" name="experiencias[]" value="Carro com motorista" /> Carro com motorista privativo</label>
+              <label><input type="checkbox" name="experiencias[]" value="Yacht" /> Yacht ou barco privativo</label>
+              <label><input type="checkbox" name="experiencias[]" value="Helicoptero" /> Helicóptero</label>
+              <label><input type="checkbox" name="experiencias[]" value="Barco compartilhado" /> Passeio de barco compartilhado selecionado</label>
+              <label><input type="checkbox" name="experiencias[]" value="Vinicolas" /> Visitas a vinícolas</label>
+              <label><input type="checkbox" name="experiencias[]" value="Culturais" /> Passeios culturais e históricos</label>
+              <label><input type="checkbox" name="experiencias[]" value="Romanticas" /> Experiências românticas</label>
+              <label><input type="checkbox" name="experiencias[]" value="Spa" /> Dia de spa / wellness</label>
+              <label><input type="checkbox" name="experiencias[]" value="Fotografo" /> Fotógrafo de viagem</label>
+              <label><input type="checkbox" name="experiencias[]" value="Aventura" /> Atividades de aventura</label>
+            </div>
+          </div>
+
+          <div>
+            <label for="experiencia-sonho">Alguma experiência dos sonhos que gostaria de tentar incluir?</label>
+            <textarea id="experiencia-sonho" name="experiencia_sonho"></textarea>
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- 8) Orçamento -->
+      <fieldset>
+        <legend>8. Orçamento</legend>
+        <div class="field-group">
+          <div>
+            <label class="required">Faixa de investimento por pessoa (sem contar compras pessoais)</label>
+            <div class="options-row">
+              <label><input type="radio" name="orcamento" value="ate15" required /> Até R$ 15.000</label>
+              <label><input type="radio" name="orcamento" value="15a25" /> R$ 15.000 – 25.000</label>
+              <label><input type="radio" name="orcamento" value="25a40" /> R$ 25.000 – 40.000</label>
+              <label><input type="radio" name="orcamento" value="40a70" /> R$ 40.000 – 70.000</label>
+              <label><input type="radio" name="orcamento" value="70a120" /> R$ 70.000 – 120.000</label>
+              <label><input type="radio" name="orcamento" value="acima120" /> Acima de R$ 120.000</label>
+              <label><input type="radio" name="orcamento" value="nao sei" /> Ainda não sei, quero entender possibilidades</label>
+            </div>
+          </div>
+
+          <div>
+            <label>O que é mais importante para você em relação ao orçamento?</label>
+            <div class="options-row">
+              <label><input type="radio" name="prioridade_orcamento" value="Otimizar custo" /> Otimizar custo, mantendo padrão Premium</label>
+              <label><input type="radio" name="prioridade_orcamento" value="Equilibrio" /> Equilíbrio entre conforto, localização e valor</label>
+              <label><input type="radio" name="prioridade_orcamento" value="Exclusividade" /> Priorizar conforto e exclusividade, mesmo com investimento maior</label>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- 9) Informações especiais -->
+      <fieldset>
+        <legend>9. Informações Especiais</legend>
+        <div class="field-group">
+          <div>
+            <label for="ja-visitou">Você já visitou algum dos destinos mencionados? O que gostou ou não gostou?</label>
+            <textarea id="ja-visitou" name="ja_visitou"></textarea>
+          </div>
+
+          <div>
+            <label>Há alguma ocasião especial nessa viagem?</label>
+            <div class="options-row">
+              <label><input type="checkbox" name="ocasiao[]" value="Aniversario" /> Aniversário</label>
+              <label><input type="checkbox" name="ocasiao[]" value="Lua de mel" /> Lua de mel</label>
+              <label><input type="checkbox" name="ocasiao[]" value="Comemoracao" /> Comemoração de relacionamento</label>
+              <label><input type="checkbox" name="ocasiao[]" value="Familia" /> Viagem em família</label>
+              <label><input type="checkbox" name="ocasiao[]" value="Amigos" /> Viagem entre amigos</label>
+              <label><input type="checkbox" name="ocasiao[]" value="Outra" /> Outra ocasião especial</label>
+              <label><input type="checkbox" name="ocasiao[]" value="Nao" /> Não, é “só” uma viagem muito desejada</label>
+            </div>
+          </div>
+
+          <div>
+            <label for="necessidades-especificas">Necessidade de saúde, mobilidade ou qualquer outro ponto importante?</label>
+            <textarea id="necessidades-especificas" name="necessidades_especificas"></textarea>
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- 10) Atendimento e origem -->
+      <fieldset>
+        <legend>10. Atendimento & Origem</legend>
+        <div class="field-group">
+          <div class="field-row two-cols">
+            <div>
+              <label>Como prefere receber a proposta inicial?</label>
+              <div class="options-row">
+                <label><input type="checkbox" name="forma_envio[]" value="WhatsApp" /> WhatsApp</label>
+                <label><input type="checkbox" name="forma_envio[]" value="Email" /> E-mail</label>
+                <label><input type="checkbox" name="forma_envio[]" value="PDF" /> PDF detalhado</label>
+                <label><input type="checkbox" name="forma_envio[]" value="Videochamada" /> Apresentação em videochamada</label>
+              </div>
+            </div>
+
+            <div>
+              <label>Melhor horário para contato</label>
+              <div class="options-row">
+                <label><input type="radio" name="horario_contato" value="Manha" /> Manhã</label>
+                <label><input type="radio" name="horario_contato" value="Tarde" /> Tarde</label>
+                <label><input type="radio" name="horario_contato" value="Noite" /> Noite</label>
+                <label><input type="radio" name="horario_contato" value="Qualquer" /> Qualquer horário em dias úteis</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="field-row two-cols">
+            <div>
+              <label>Como você conheceu a Brazilian Soul?</label>
+              <div class="options-row">
+                <label><input type="radio" name="origem" value="Instagram" /> Instagram</label>
+                <label><input type="radio" name="origem" value="Indicacao" /> Indicação de amigos</label>
+                <label><input type="radio" name="origem" value="Google" /> Google</label>
+                <label><input type="radio" name="origem" value="YouTube" /> YouTube</label>
+                <label><input type="radio" name="origem" value="Outro" /> Outro</label>
+              </div>
+            </div>
+            <div>
+              <label for="mensagem-final">Mais algum detalhe importante para criarmos a viagem perfeita?</label>
+              <textarea id="mensagem-final" name="mensagem_final"></textarea>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+
+      <div class="form-footer">
+        <button type="submit">Enviar formulário</button>
+        <p class="tiny-note">Após o envio, um especialista da Brazilian Soul entrará em contato para iniciar a curadoria do seu roteiro.</p>
+      </div>
+    </form>
+  </div>
+</body>
+</html>
